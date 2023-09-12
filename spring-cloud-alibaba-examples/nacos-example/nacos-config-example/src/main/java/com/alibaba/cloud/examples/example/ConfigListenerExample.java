@@ -44,7 +44,7 @@ public class ConfigListenerExample {
 	/**
 	 * Nacos dataId.
 	 */
-	public static final String DATA_ID = "nacos-config-example.properties";
+	public static final String DATA_ID = "nacos-config-example.yml";
 
 	/**
 	 * Nacos group.
@@ -57,6 +57,8 @@ public class ConfigListenerExample {
 	@PostConstruct
 	public void init() throws NacosException {
 		ConfigService configService = nacosConfigManager.getConfigService();
+
+		String value = configService.getConfig(DATA_ID, "DEFAULT_GROUP", 5000);
 
 		configService.addListener(DATA_ID, GROUP, new Listener() {
 			@Override
